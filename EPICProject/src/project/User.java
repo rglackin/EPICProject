@@ -7,21 +7,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 public class User {
 	public static void main(String[] args) {
-		User instance = new User();
-		instance.setUserInfo(getUserInfo());
-		if (instance.validLogIn(getUserInfo())) {
-			System.out.println("Login successful.");
-		} else {System.out.println("Invalid login information.");}
+		
 		
 	}
     public static String[] getUserInfo() {
     	String[] userInfo = new String[2];
-    	Scanner userInput = new Scanner(System.in);
-    	System.out.println("Enter username: ");
-    	userInfo[0] = userInput.nextLine();
-    	System.out.println("Enter password: ");
-    	userInfo[1] = userInput.nextLine();
-    	userInput.close();
+
+    	//Scanner userInput = new Scanner(System.in);
+    	//System.out.println("Enter username: ");
+		LoginScreen login = new LoginScreen();
+		
+    	//userInfo[0] = login.getUsernameInput();//userInput.nextLine();
+    	//System.out.println("Enter password: ");
+    	//userInfo[1] = login.getPassInput();//userInput.nextLine();
+    	//userInput.close();
         return userInfo;
     }
     public void setUserInfo(String[] userInfo) {
