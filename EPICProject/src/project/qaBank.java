@@ -1,9 +1,34 @@
 package project;
-
+import java.util.Random;
 public class qaBank {
 	public static void main(String[] args) {
 		
 	}
+	
+	public double startTimer(boolean startTimer) {
+		
+	}
+	
+	public int incOrRand(boolean incOrRand, boolean firstQ, int[] prevQ) {//incOrRand=true: Increasing difficulty. False: Random Questions
+										//if firstQ=true, prevQ is irrelevant, always returns 0
+		int r = 0;
+		if (firstQ) {return 0;}
+		if (incOrRand) {
+			r = prevQ[(prevQ.length-1)]+1;
+			if ((r >= 0) && (r<=17)) {return r;}
+		} else {
+			Random rand = new Random();
+			for (int f = 0; f<= prevQ.length; f++) {
+				r = rand.nextInt(17);
+				while (r != prevQ[f]) {
+					return r;
+				}
+			}
+			return 0;
+		}
+		return 0;
+	}
+	
 	public String returnQuestion(int q) {
 		String[] questionArr = {
 				// Discrete Mathematics: q=0,1,2,3,4,5 | Novice:0,1 | Intermediate: 2,3 | Advanced: 4,5
