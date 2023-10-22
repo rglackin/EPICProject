@@ -1,33 +1,22 @@
 package project;
 import java.util.Random;
 public class qaBank {
-	public static void main(String[] args) {
-		
-	}
 	
-	public double startTimer(boolean startTimer) {
-		
-	}
-	
-	public int incOrRand(boolean incOrRand, boolean firstQ, int[] prevQ) {//incOrRand=true: Increasing difficulty. False: Random Questions
-										//if firstQ=true, prevQ is irrelevant, always returns 0
-		int r = 0;
-		if (firstQ) {return 0;}
+	public int[] incOrRand(boolean incOrRand) {//incOrRand=true: Increasing difficulty. False: Random Questions
+		int[] arr = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
 		if (incOrRand) {
-			r = prevQ[(prevQ.length-1)]+1;
-			if ((r >= 0) && (r<=17)) {return r;}
+			return arr;
 		} else {
 			Random rand = new Random();
-			for (int f = 0; f<= prevQ.length; f++) {
-				r = rand.nextInt(17);
-				while (r != prevQ[f]) {
-					return r;
+			for (int i = 0; i < arr.length; i++) {
+				int randomIndexToSwap = rand.nextInt(arr.length);
+				int temp = arr[randomIndexToSwap];
+				arr[randomIndexToSwap] = arr[i];
+				arr[i] = temp;
 				}
-			}
-			return 0;
+				}	
+			return arr;
 		}
-		return 0;
-	}
 	
 	public String returnQuestion(int q) {
 		String[] questionArr = {
