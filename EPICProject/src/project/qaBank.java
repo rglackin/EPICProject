@@ -39,6 +39,7 @@ public class qaBank {
 				"What is the Von Neumann Bottleneck caused by?",
 				"What is Level 1 in the Contemporary Multilevel Machine?",
 				"What does RISC stand for?",
+				"When converting binary to hexadecimal, how many binary digits should one group per hexadecimal digit?",
 				"What is the purpose of this assembly program?\n.begin\r\n"
 				+ "    .org 2048\r\n"
 				+ "progl:	ld    [x], %r1\r\n"
@@ -46,11 +47,10 @@ public class qaBank {
 				+ "   	subcc %r1, %r2, %r3\r\n"
 				+ "  	st %r3, [z]\r\n"
 				+ "    	!jmpl %r15 + 4, %r0\r\n"
-				+ "x:    15\r\n"
-				+ "y:    9\r\n"
+				+ "x:    7\r\n"
+				+ "y:    4\r\n"
 				+ "z:    0\r\n"
-				+ "    .end",
-				"When converting binary to hexadecimal, how many binary digits should one group per hexadecimal digit?",};
+				+ "    .end",};
 		return questionArr[q];
 	}
 	public String returnAnswer(int i, int j) {
