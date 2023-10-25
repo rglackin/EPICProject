@@ -1,33 +1,22 @@
 package project;
 import java.util.Random;
 public class qaBank {
-	public static void main(String[] args) {
-		
-	}
 	
-	/*public double startTimer(boolean startTimer) {
-		
-	}*/
-	
-	public int incOrRand(boolean incOrRand, boolean firstQ, int[] prevQ) {//incOrRand=true: Increasing difficulty. False: Random Questions
-										//if firstQ=true, prevQ is irrelevant, always returns 0
-		int r = 0;
-		if (firstQ) {return 0;}
+	public int[] incOrRand(boolean incOrRand) {//incOrRand=true: Increasing difficulty. False: Random Questions
+		int[] arr = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
 		if (incOrRand) {
-			r = prevQ[(prevQ.length-1)]+1;
-			if ((r >= 0) && (r<=17)) {return r;}
+			return arr;
 		} else {
 			Random rand = new Random();
-			for (int f = 0; f<= prevQ.length; f++) {
-				r = rand.nextInt(17);
-				while (r != prevQ[f]) {
-					return r;
+			for (int i = 0; i < arr.length; i++) {
+				int randomIndexToSwap = rand.nextInt(arr.length);
+				int temp = arr[randomIndexToSwap];
+				arr[randomIndexToSwap] = arr[i];
+				arr[i] = temp;
 				}
-			}
-			return 0;
+				}	
+			return arr;
 		}
-		return 0;
-	}
 	
 	public String returnQuestion(int q) {
 		String[] questionArr = {
@@ -50,6 +39,7 @@ public class qaBank {
 				"What is the Von Neumann Bottleneck caused by?",
 				"What is Level 1 in the Contemporary Multilevel Machine?",
 				"What does RISC stand for?",
+				"When converting binary to hexadecimal, how many binary digits should one group per hexadecimal digit?",
 				"What is the purpose of this assembly program?\n.begin\r\n"
 				+ "    .org 2048\r\n"
 				+ "progl:	ld    [x], %r1\r\n"
@@ -57,11 +47,10 @@ public class qaBank {
 				+ "   	subcc %r1, %r2, %r3\r\n"
 				+ "  	st %r3, [z]\r\n"
 				+ "    	!jmpl %r15 + 4, %r0\r\n"
-				+ "x:    15\r\n"
-				+ "y:    9\r\n"
+				+ "x:    7\r\n"
+				+ "y:    4\r\n"
 				+ "z:    0\r\n"
-				+ "    .end",
-				"When converting binary to hexadecimal, how many binary digits should one group per hexadecimal digit?",};
+				+ "    .end",};
 		return questionArr[q];
 	}
 	public String returnAnswer(int i, int j) {
