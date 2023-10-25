@@ -3,16 +3,18 @@ import java.util.Random;
 public class qaBank {
 	
 	public int[] incOrRand(boolean incOrRand) {//incOrRand=true: Increasing difficulty. False: Random Questions
-		int[] arr = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
+		int[] arr = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
 		if (incOrRand) {
 			return arr;
 		} else {
 			Random rand = new Random();
 			for (int i = 0; i < arr.length; i++) {
-				int randomIndexToSwap = rand.nextInt(arr.length);
+				int randomIndexToSwap = rand.nextInt(arr.length-1);
+
 				int temp = arr[randomIndexToSwap];
 				arr[randomIndexToSwap] = arr[i];
 				arr[i] = temp;
+				//System.out.println(i+": "+temp);
 				}
 				}	
 			return arr;
@@ -74,8 +76,8 @@ public class qaBank {
 		{"The PSU not supplying sufficient voltage","Data loss in hard drives","The CPU awaiting instruction from cache, memory or hard drives","Newer operating systems running on older components"},//2
 		{"Microarchitecture Level","Digital Logic Level","Instruction Set Architecture Level","Operating System Machine Level"},//1
 		{"Reduced Input Selection Computer","Rapid Instruction Set Computing","Retailed Integrated System Chip","Reduced Instruction Set Computer"},//3
-		{"Add 2 numbers","Subtract 2 numbers","Subtract 3 numbers","Multiply 2 numbers by 0"},//1
-		{"1","2","4","8"},};//2
+		{"1","2","4","8"},//2
+		{"Add 2 numbers","Subtract 2 numbers","Subtract 3 numbers","Multiply 2 numbers by 0"}};//1
 		//i+1 = question number, increment j from 0 to <= choiceAnswer[i].length to print list of optional answers
 		return choiceAnswer[i][j];
 		}
