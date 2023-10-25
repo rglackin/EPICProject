@@ -34,7 +34,7 @@ public class qaBank {
 				"True/False: All Hasse Diagrams are lattices.",
 				"True/False: A lattice is both a sup-semilattice and an inf-semilattice.",
 				"What are the properties of a partial order relation?",
-				"True/False: If p is a lower bound of Y in (S,partial order), and there is an element q in the lower bounds of Y such that p partial order q holds for all p in the lower bounds of X, then q is the minimum of X in (S, partial order)",
+				"True/False: If p is a lower bound of Y in (S,partial order),\n and there is an element q in the lower bounds of Y such that p partial order q holds for all p in the lower bounds of Y,/n then q is the minimum of Y in (S, partial order)",
 				"True/False: Tarski's fixed point theorem states that, in a complete lattice, every order-preserving function has at least one fixed point.",
 				//Computer Organization: q=12,13,14,15,16,17 | Novice:12,13 | Intermediate: 14,15 | Advanced: 16,17
 				"What is the binary equivalent to 17?",
@@ -76,8 +76,8 @@ public class qaBank {
 		{"The PSU not supplying sufficient voltage","Data loss in hard drives","The CPU awaiting instruction from cache, memory or hard drives","Newer operating systems running on older components"},//2
 		{"Microarchitecture Level","Digital Logic Level","Instruction Set Architecture Level","Operating System Machine Level"},//1
 		{"Reduced Input Selection Computer","Rapid Instruction Set Computing","Retailed Integrated System Chip","Reduced Instruction Set Computer"},//3
-		{"1","2","4","8"},//2
-		{"Add 2 numbers","Subtract 2 numbers","Subtract 3 numbers","Multiply 2 numbers by 0"}};//1
+		{"Add 2 numbers","Subtract 2 numbers","Subtract 3 numbers","Multiply 2 numbers by 0"},//1
+		{"1","2","4","8"},};//2
 		//i+1 = question number, increment j from 0 to <= choiceAnswer[i].length to print list of optional answers
 		return choiceAnswer[i][j];
 		}
