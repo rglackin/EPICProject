@@ -2,7 +2,10 @@ package project;
 
 public class Main {
     public static void main(String[] args) {
-        
-        new LoginScreen();
+        User u = new User();
+        String[] info = {"ruairi","pass"};
+        u.setUserInfo(info);
+        //new LoginScreen();
+        new QuizScreen(u);
     }
 }

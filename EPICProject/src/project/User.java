@@ -6,23 +6,35 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 public class User {
-	public static void main(String[] args) {
-		
-		
+	private String username,password;
+	
+	
+	public String getUsername(){
+		return username;
 	}
-    public static String[] getUserInfo() {
+	private void setUsername(String value){
+		this.username = value;
+	}
+	public String getPassword(){
+		return password;
+	}
+	private void setPassword(String value){
+		this.password= value;
+	}
+	
+    /*public static String[] getUserInfo() {
     	String[] userInfo = new String[2];
 
     	//Scanner userInput = new Scanner(System.in);
     	//System.out.println("Enter username: ");
-		LoginScreen login = new LoginScreen();
+		//LoginScreen login = new LoginScreen();
 		
     	//userInfo[0] = login.getUsernameInput();//userInput.nextLine();
     	//System.out.println("Enter password: ");
     	//userInfo[1] = login.getPassInput();//userInput.nextLine();
     	//userInput.close();
         return userInfo;
-    }
+    }*/
     public void setUserInfo(String[] userInfo) {
     	try {
     	      File myObj = new File("userProfiles.txt");
@@ -38,11 +50,14 @@ public class User {
                 while (reader.hasNextLine()) {
                 	writer.write("\n");
                 	reader.nextLine();
+					
                 	}
                 reader.close();
               } catch (IOException e) {e.printStackTrace();}
             writer.write(userInfo[0] + " " + userInfo[1]);
             writer.close();
+			setUsername(userInfo[0]);
+			setPassword(userInfo[1]);
           } catch (IOException e) {
             e.printStackTrace();
           }
@@ -55,6 +70,8 @@ public class User {
 	    	while (reader.hasNextLine()) {
 				if (((userInfo[0] + " " + userInfo[1]).trim()).equals((reader.nextLine().trim()))) {
 					reader.close();
+					setUsername(userInfo[0]);
+					setPassword(userInfo[1]);
 					return true;
 				}
 			}

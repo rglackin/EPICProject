@@ -5,9 +5,9 @@ public class qaBank {
 		
 	}
 	
-	public double startTimer(boolean startTimer) {
+	/*public double startTimer(boolean startTimer) {
 		
-	}
+	}*/
 	
 	public int incOrRand(boolean incOrRand, boolean firstQ, int[] prevQ) {//incOrRand=true: Increasing difficulty. False: Random Questions
 										//if firstQ=true, prevQ is irrelevant, always returns 0

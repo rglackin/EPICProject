@@ -8,27 +8,7 @@
             "type": "java",
             "name": "Main",
             "request": "launch",
-            "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "GUI",
-            "request": "launch",
-            "mainClass": "project.GUI",
-            "projectName": "EPICProject_9687a3ff"
-        },
-        {
-            "type": "java",
-            "name": "Main",
-            "request": "launch",
             "mainClass": "project.Main",
-            "projectName": "EPICProject_9687a3ff"
-        },
-        {
-            "type": "java",
-            "name": "User",
-            "request": "launch",
-            "mainClass": "project.User",
             "projectName": "EPICProject_9687a3ff"
         }
     ]
