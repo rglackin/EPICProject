@@ -1,4 +1,3 @@
-package project;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,7 +10,7 @@ public class QuizScreen implements ActionListener {
     qaBank bank = new qaBank();
     int[] qNums;
     int qPointer = 0;
-    int marks=0;
+    int marks = 0;
     // initialising frame and components
     static JFrame frame = new JFrame("Quiz");
     JPanel formatPanel = new JPanel();
@@ -29,7 +28,8 @@ public class QuizScreen implements ActionListener {
     JButton btnAnsOne = new JButton("a1");
     JButton btnAnsTwo = new JButton("a2");
     JButton btnAnsThree = new JButton("a3");
-    JLabel lblMarks = new JLabel("Marks: "+marks);
+    JLabel lblMarks = new JLabel("Marks: " + marks);
+    //JLabel lblAStatus = new JLabel();
     ButtonGroup ansGroup = new ButtonGroup();
 
     public QuizScreen(User u) {
@@ -43,8 +43,10 @@ public class QuizScreen implements ActionListener {
         // set title font
         lblSelectFormat.setFont(new Font("", Font.BOLD, 20));
         lblQuestion.setFont(new Font("", Font.BOLD, 14));
+        lblMarks.setFont(new Font("", Font.BOLD, 20));
+        //lblAStatus.setFont(new Font("", Font.BOLD, 20));
         // set format panel size/layout
-        formatPanel.setSize(1000, 700);
+        formatPanel.setSize(1200, 800);
         formatPanel.setLayout(layout);
         // setup radio button group
         radiGroup.add(radIncDiff);
@@ -62,12 +64,14 @@ public class QuizScreen implements ActionListener {
 
         quizPanel.setVisible(false);
         quizPanel.add(lblQuestion);
+        //quizPanel.add(lblAStatus);
         quizPanel.add(btnAnsZero);
         quizPanel.add(btnAnsOne);
         quizPanel.add(btnAnsTwo);
         quizPanel.add(btnAnsThree);
+        quizPanel.add(lblMarks);
         // set quiz panel size/layout
-        quizPanel.setSize(1000, 700);
+        quizPanel.setSize(1200, 800);
         quizPanel.setLayout(layout);
 
         // Spring layout constraints
@@ -91,18 +95,24 @@ public class QuizScreen implements ActionListener {
 
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, btnAnsZero, -200, SpringLayout.HORIZONTAL_CENTER,
                 quizPanel);
-        layout.putConstraint(SpringLayout.VERTICAL_CENTER, btnAnsZero, 50, SpringLayout.VERTICAL_CENTER, quizPanel);
+        layout.putConstraint(SpringLayout.VERTICAL_CENTER, btnAnsZero, -50, SpringLayout.VERTICAL_CENTER, quizPanel);
 
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, btnAnsOne, 200, SpringLayout.HORIZONTAL_CENTER, quizPanel);
-        layout.putConstraint(SpringLayout.VERTICAL_CENTER, btnAnsOne, 50, SpringLayout.VERTICAL_CENTER, quizPanel);
+        layout.putConstraint(SpringLayout.VERTICAL_CENTER, btnAnsOne, -50, SpringLayout.VERTICAL_CENTER, quizPanel);
 
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, btnAnsTwo, -200, SpringLayout.HORIZONTAL_CENTER,
                 quizPanel);
-        layout.putConstraint(SpringLayout.VERTICAL_CENTER, btnAnsTwo, -50, SpringLayout.VERTICAL_CENTER, quizPanel);
+        layout.putConstraint(SpringLayout.VERTICAL_CENTER, btnAnsTwo, 50, SpringLayout.VERTICAL_CENTER, quizPanel);
 
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, btnAnsThree, 200, SpringLayout.HORIZONTAL_CENTER,
                 quizPanel);
-        layout.putConstraint(SpringLayout.VERTICAL_CENTER, btnAnsThree, -50, SpringLayout.VERTICAL_CENTER, quizPanel);
+        layout.putConstraint(SpringLayout.VERTICAL_CENTER, btnAnsThree, 50, SpringLayout.VERTICAL_CENTER, quizPanel);
+
+        layout.putConstraint(SpringLayout.WEST, lblMarks, 10, SpringLayout.WEST, quizPanel);
+        layout.putConstraint(SpringLayout.SOUTH, lblMarks, -10, SpringLayout.SOUTH, quizPanel);
+
+        //layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, lblAStatus, 0, SpringLayout.HORIZONTAL_CENTER, quizPanel);
+        //layout.putConstraint(SpringLayout.VERTICAL_CENTER, lblAStatus, 0, SpringLayout.VERTICAL_CENTER, quizPanel);
 
         btnStart.addActionListener(this);
         btnStart.setActionCommand("startQuiz");
@@ -119,10 +129,12 @@ public class QuizScreen implements ActionListener {
         btnAnsThree.addActionListener(this);
         btnAnsThree.setActionCommand("a3");
 
+        //lblAStatus.setVisible(false);
+
         frame.add(formatPanel);
         frame.add(quizPanel);
         frame.pack();
-        frame.setSize(1000, 700);
+        frame.setSize(1200, 800);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
@@ -164,22 +176,43 @@ public class QuizScreen implements ActionListener {
     }
 
     public void nextQuestion(int answerChoice) {
-        if(answerChoice>=0){
-            System.out.println(bank.correctAnswer(qNums[qPointer]));
+        try {
+            if (answerChoice >= 0) {
+                int correctAns = bank.correctAnswer(qNums[qPointer]);
+                if (answerChoice == correctAns) {
+                    marks++;
+                    lblMarks.setText("Marks: " + marks);
+                    //lblAStatus.setText("Correct!");
+                    //lblAStatus.setBackground(Color.GREEN);
+                }
+                
+                //lblAStatus.setVisible(true);
+                qPointer++;
+                
+                //lblAStatus.setVisible(false);
+            }
+            lblQuestion.setText("<html><pre>" + bank.returnQuestion(qNums[qPointer]) + "</pre></html>");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            //end quiz
+            endQuiz();
+            return;
         }
-        lblQuestion.setText(bank.returnQuestion(qNums[qPointer]));
-        try{
-        btnAnsTwo.setVisible(true);
-        btnAnsThree.setVisible(true);
-        btnAnsZero.setText(bank.returnAnswer(qNums[qPointer], 0));
-        btnAnsOne.setText(bank.returnAnswer(qNums[qPointer], 1));
-        btnAnsTwo.setText(bank.returnAnswer(qNums[qPointer], 2));
-        btnAnsThree.setText(bank.returnAnswer(qNums[qPointer], 3));
-        }
-        catch(ArrayIndexOutOfBoundsException e){
+        try {
+            btnAnsTwo.setVisible(true);
+            btnAnsThree.setVisible(true);
+            btnAnsZero.setText(bank.returnAnswer(qNums[qPointer], 0));
+            btnAnsOne.setText(bank.returnAnswer(qNums[qPointer], 1));
+            btnAnsTwo.setText(bank.returnAnswer(qNums[qPointer], 2));
+            btnAnsThree.setText(bank.returnAnswer(qNums[qPointer], 3));
+        } catch (ArrayIndexOutOfBoundsException e) {
             btnAnsTwo.setVisible(false);
             btnAnsThree.setVisible(false);
         }
-        qPointer++;
+
+    }
+    public void endQuiz(){
+        u.setMark(marks);
+        new QuizOver(u);
+        frame.dispose();
     }
 }

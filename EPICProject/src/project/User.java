@@ -1,4 +1,4 @@
-package project;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -7,8 +7,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 public class User {
 	private String username,password;
+	private int mark;
 	
-	
+	public int getMark(){
+		return this.mark;
+	}
+	public void setMark(int mark){
+		this.mark = mark;
+	}
 	public String getUsername(){
 		return username;
 	}

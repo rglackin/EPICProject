@@ -1,8 +1,9 @@
-package project;
+
 
 import javax.swing.*;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.*;
 
 //import java.awt.Dimension;
@@ -27,6 +28,8 @@ public class MenuScreen implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel.setBackground(Color.CYAN);
         lblUsername.setText(lblUsername.getText() + "" + u.getUsername());
+        lblUsername.setFont(new Font("", Font.PLAIN, 16));
+        lblMenu.setFont(new Font("", Font.BOLD, 20));
         panel.setSize(700, 500);
         panel.setLayout(layout);
         panel.add(btnQuiz);
@@ -35,16 +38,16 @@ public class MenuScreen implements ActionListener {
         panel.add(lblMenu);
         // lblUsername CONSTRAINTS
         layout.putConstraint(SpringLayout.WEST, lblUsername, 5, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, lblUsername, 5, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, lblUsername, 50, SpringLayout.NORTH, panel);
         // lblMenu CONSTRAINTS
-        layout.putConstraint(SpringLayout.WEST, lblMenu, 20, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, lblMenu, SwingConstants.CENTER, SpringLayout.SOUTH, panel);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, lblMenu, 0, SpringLayout.HORIZONTAL_CENTER, panel);
+        layout.putConstraint(SpringLayout.NORTH, lblMenu, 5, SpringLayout.NORTH, panel);
         // btnStats CONSTRAINTS
-        layout.putConstraint(SpringLayout.WEST, btnStats, SwingConstants.CENTER + 50, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, btnStats, 50, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, btnStats,  50, SpringLayout.HORIZONTAL_CENTER, panel);
+        layout.putConstraint(SpringLayout.VERTICAL_CENTER, btnStats, 0, SpringLayout.VERTICAL_CENTER, panel);
         // btnQuiz CONSTRAINTS
-        layout.putConstraint(SpringLayout.WEST, btnQuiz, 10, SpringLayout.EAST, btnStats);
-        layout.putConstraint(SpringLayout.NORTH, btnQuiz, 50, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, btnQuiz, -50, SpringLayout.HORIZONTAL_CENTER, panel);
+        layout.putConstraint(SpringLayout.VERTICAL_CENTER, btnQuiz, 0, SpringLayout.VERTICAL_CENTER, panel);
 
         frame.add(panel);
         frame.pack();
