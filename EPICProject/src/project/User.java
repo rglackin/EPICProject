@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class User {
 	private String username, password;
-	private int mark, id;
+	private int id;
 
 	public int getID() {
 		return this.id;
@@ -20,13 +20,13 @@ public class User {
 		this.id = value;
 	}
 
-	public int getMark() {
+	/*public int getMark() {
 		return this.mark;
 	}
 
-	public void setMark(int mark) {
+	/*public void setMark(int mark) {
 		this.mark = mark;
-	}
+	}*/
 
 	public String getUsername() {
 		return username;

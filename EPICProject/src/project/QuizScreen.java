@@ -7,6 +7,7 @@ import javax.swing.*;
 
 public class QuizScreen implements ActionListener {
     User u = new User();
+    Quiz q = new Quiz();
     qaBank bank = new qaBank();
     int[] qNums;
     int qPointer = 0;
@@ -34,6 +35,8 @@ public class QuizScreen implements ActionListener {
 
     public QuizScreen(User u) {
         this.u = u;
+        q.setU(u);
+        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // set background color
         formatPanel.setBackground(Color.CYAN);
@@ -146,8 +149,10 @@ public class QuizScreen implements ActionListener {
             case "startQuiz":
                 if (radIncDiff.isSelected()) {
                     startQuiz(true);
+                    q.setQuizType(0);
                 } else if (radRandom.isSelected()) {
                     startQuiz(false);
+                    q.setQuizType(1);
                 } else {
                     JOptionPane.showMessageDialog(null, "Select a format");
                 }
@@ -211,8 +216,9 @@ public class QuizScreen implements ActionListener {
 
     }
     public void endQuiz(){
-        u.setMark(marks);
-        new QuizOver(u);
+        q.setMark(marks);
+        
+        new QuizOver(u,q);
         frame.dispose();
     }
 }

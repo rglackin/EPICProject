@@ -2,15 +2,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
+
 
 import javax.swing.*;
 public class QuizOver implements ActionListener {
     User u = new User();
+    Quiz q;
     static JFrame frame = new JFrame("Quiz Over");
     JPanel panel = new JPanel();
     SpringLayout layout = new SpringLayout();
@@ -19,13 +16,14 @@ public class QuizOver implements ActionListener {
     JLabel lblMark = new JLabel();
     JLabel lblTitle = new JLabel("Quiz Over");
 
-    public QuizOver(User u) {
+    public QuizOver(User u, Quiz q) {
         this.u = u;
-        writeResult();
+        this.q = q;
+        q.writeResult();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel.setBackground(Color.CYAN);
         lblUsername.setText(lblUsername.getText() + "" + u.getUsername());
-        lblMark.setText("Mark: "+u.getMark()+"/18");
+        lblMark.setText("Mark: "+q.getMark()+"/18");
         lblMark.setFont(new Font("", Font.BOLD, 20));
         lblTitle.setFont(new Font("", Font.BOLD, 20));
         lblUsername.setFont(new Font("", Font.BOLD, 20));
@@ -61,31 +59,7 @@ public class QuizOver implements ActionListener {
        
     }
 
-    public void writeResult() {
-    	try {
-    	      File myObj = new File("results.txt");
-    	      myObj.createNewFile();
-    	} catch (IOException e) {
-    	      System.out.println("An error occurred.");
-    	      e.printStackTrace();
-    	}
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("results.txt", true));
-            try {
-                Scanner reader = new Scanner("results.txt");
-                while (reader.hasNextLine()) {
-                	writer.write("\n");
-                	reader.nextLine();
-					
-                	}
-                reader.close();
-              } catch (IOException e) {e.printStackTrace();}
-            writer.write(u.getUsername() + " " + u.getMark());
-            writer.close();
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
-    }
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {

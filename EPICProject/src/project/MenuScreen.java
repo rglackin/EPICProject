@@ -69,6 +69,8 @@ public class MenuScreen implements ActionListener {
                 frame.dispose();
                 break;
             case "Stats":
+                new StatsScreen(u);
+                frame.dispose();
                 break;
         }
     }
