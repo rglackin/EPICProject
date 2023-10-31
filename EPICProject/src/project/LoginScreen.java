@@ -82,7 +82,7 @@ public class LoginScreen implements ActionListener {
                     Register(info);
                     break;
             }
-            OpenMenu();
+            
         }
         else {
                 JOptionPane.showMessageDialog(null, "Login Unsuccessful, please enter a username and password");
@@ -93,12 +93,14 @@ public class LoginScreen implements ActionListener {
         //User u = new User();
         if (u.validLogIn(info)) {
                     //System.out.println("Login Successful");
+                    OpenMenu();
                 } else {
                     JOptionPane.showMessageDialog(null, "Login Unsuccessful, Invalid username or password");
                 }
     }
     public static void Register(String[] info) {
         u.setUserInfo(info);
+        OpenMenu();
     }
     public static void OpenMenu(){
         new MenuScreen(u);
