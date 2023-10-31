@@ -12,6 +12,8 @@ public class QuizScreen implements ActionListener {
     int[] qNums;
     int qPointer = 0;
     int marks = 0;
+
+    long startTime = 0;
     // initialising frame and components
     static JFrame frame = new JFrame("Quiz");
     JPanel formatPanel = new JPanel();
@@ -23,6 +25,7 @@ public class QuizScreen implements ActionListener {
     ButtonGroup radiGroup = new ButtonGroup();
     JRadioButton radRandom = new JRadioButton("Random selection");
     JRadioButton radIncDiff = new JRadioButton("Increasing Difficulty");
+    JRadioButton radTimed = new JRadioButton("Timed");
     JButton btnStart = new JButton("Start Quiz");
     JLabel lblQuestion = new JLabel("question");
     JButton btnAnsZero = new JButton("a0");
@@ -43,6 +46,7 @@ public class QuizScreen implements ActionListener {
         quizPanel.setBackground(Color.CYAN);
         radIncDiff.setBackground(Color.cyan);
         radRandom.setBackground(Color.cyan);
+        radTimed.setBackground(Color.cyan);
         // set title font
         lblSelectFormat.setFont(new Font("", Font.BOLD, 20));
         lblQuestion.setFont(new Font("", Font.BOLD, 14));
@@ -54,6 +58,7 @@ public class QuizScreen implements ActionListener {
         // setup radio button group
         radiGroup.add(radIncDiff);
         radiGroup.add(radRandom);
+        radiGroup.add(radTimed);
 
         ansGroup.add(btnAnsZero);
         ansGroup.add(btnAnsOne);
@@ -64,6 +69,7 @@ public class QuizScreen implements ActionListener {
         formatPanel.add(radIncDiff);
         formatPanel.add(radRandom);
         formatPanel.add(btnStart);
+        formatPanel.add(radTimed);
 
         quizPanel.setVisible(false);
         quizPanel.add(lblQuestion);
@@ -85,6 +91,10 @@ public class QuizScreen implements ActionListener {
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, radIncDiff, -100, SpringLayout.HORIZONTAL_CENTER,
                 formatPanel);
         layout.putConstraint(SpringLayout.NORTH, radIncDiff, 40, SpringLayout.NORTH, formatPanel);
+
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, radTimed, 0, SpringLayout.HORIZONTAL_CENTER,
+                formatPanel);
+        layout.putConstraint(SpringLayout.NORTH, radTimed, 40, SpringLayout.NORTH, formatPanel);
 
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, radRandom, 100, SpringLayout.HORIZONTAL_CENTER,
                 formatPanel);
@@ -148,12 +158,16 @@ public class QuizScreen implements ActionListener {
 
             case "startQuiz":
                 if (radIncDiff.isSelected()) {
-                    startQuiz(true);
                     q.setQuizType(0);
+                    startQuiz(true);
                 } else if (radRandom.isSelected()) {
-                    startQuiz(false);
                     q.setQuizType(1);
-                } else {
+                    startQuiz(false);
+                }else if(radTimed.isSelected()){
+                    q.setQuizType(2);
+                    startQuiz(true);
+                }
+                 else {
                     JOptionPane.showMessageDialog(null, "Select a format");
                 }
                 break;
@@ -175,7 +189,9 @@ public class QuizScreen implements ActionListener {
     public void startQuiz(boolean incOrRand) {
         formatPanel.setVisible(false);
         quizPanel.setVisible(true);
-
+        if(q.getQuizType()==2){
+            startTime = startTimer();
+        }
         qNums = bank.incOrRand(incOrRand);
         nextQuestion(-1);
     }
@@ -217,8 +233,20 @@ public class QuizScreen implements ActionListener {
     }
     public void endQuiz(){
         q.setMark(marks);
-        
+        if(q.getQuizType()==2){
+            endTimer(startTime);
+        }
         new QuizOver(u,q);
         frame.dispose();
     }
+    public long startTimer() { //method to begin timer
+		long startTime = System.currentTimeMillis();
+        return startTime;
+	}
+	public  void endTimer(long startTime) { //method to end timer and return elapsed time
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        q.setTime(elapsedTime / 1000.0); 
+
+	}
 }

@@ -14,6 +14,7 @@ public class QuizOver implements ActionListener {
     JButton btnNext = new JButton("Exit to Menu", null);
     JLabel lblUsername = new JLabel("Username: ");
     JLabel lblMark = new JLabel();
+    JLabel lblTime = new JLabel();
     JLabel lblTitle = new JLabel("Quiz Over");
 
     public QuizOver(User u, Quiz q) {
@@ -25,12 +26,15 @@ public class QuizOver implements ActionListener {
         lblUsername.setText(lblUsername.getText() + "" + u.getUsername());
         lblMark.setText("Mark: "+q.getMark()+"/18");
         lblMark.setFont(new Font("", Font.BOLD, 20));
+        lblTime.setText("Time taken: "+q.getTime()+"s");
+        lblTime.setFont(new Font("", Font.BOLD, 20));
         lblTitle.setFont(new Font("", Font.BOLD, 20));
         lblUsername.setFont(new Font("", Font.BOLD, 20));
         panel.setSize(700, 500);
         panel.setLayout(layout);
         panel.add(btnNext);
         panel.add(lblMark);
+        panel.add(lblTime);
         
         panel.add(lblUsername);
         panel.add(lblTitle);
@@ -40,6 +44,9 @@ public class QuizOver implements ActionListener {
         // lblTitle CONSTRAINTS
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, lblTitle, 0, SpringLayout.HORIZONTAL_CENTER, panel);
         layout.putConstraint(SpringLayout.NORTH, lblTitle, 20, SpringLayout.NORTH, panel);
+        // lblTime CONSTRAINTS
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, lblTime, 0, SpringLayout.HORIZONTAL_CENTER, panel);
+        layout.putConstraint(SpringLayout.VERTICAL_CENTER, lblTime, 20, SpringLayout.VERTICAL_CENTER, panel);
         // lblMark CONSTRAINTS
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, lblMark, 0, SpringLayout.HORIZONTAL_CENTER, panel);
         layout.putConstraint(SpringLayout.VERTICAL_CENTER, lblMark, 50, SpringLayout.VERTICAL_CENTER, panel);
@@ -48,7 +55,12 @@ public class QuizOver implements ActionListener {
         layout.putConstraint(SpringLayout.VERTICAL_CENTER, btnNext, 80, SpringLayout.VERTICAL_CENTER, panel);
 
         
-
+        if(q.getQuizType()==2){
+            lblTime.setVisible(true);
+        }
+        else{
+            lblTime.setVisible(false);
+        }
         frame.add(panel);
         frame.pack();
         frame.setSize(700, 500);

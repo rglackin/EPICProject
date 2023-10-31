@@ -80,7 +80,7 @@ public class Quiz {
             }
             reader.close();
 
-            writer.write("\n"+u.getID() + " " + this.getQuizType() + " " + u.getUsername() + " " + this.getMark());
+            writer.write("\n"+u.getID() + " " + this.getQuizType() + " " + u.getUsername() + " " + this.getMark()+"\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -106,11 +106,13 @@ public class Quiz {
             }
             reader.close();
 
-            writer.write("\n"+u.getID() + " " + this.getQuizType() + " " + u.getUsername() + " " + this.getMark() + " " +this.getTime());
+            writer.write(u.getID() + " " + this.getQuizType() + " " + u.getUsername() + " " + this.getMark() + " " +this.getTime()+"\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    
 
 }

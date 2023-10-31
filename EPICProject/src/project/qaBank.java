@@ -2,20 +2,7 @@
 import java.util.Random;
 public class qaBank {
 	
-	public void startTimer() { //method to begin timer
-		long startTime = System.currentTimeMillis();
-	}
 	
-	/* In main method:
-	*  Timer quizTimer = new Timer();
-	*  quizTimer.start();
-	*  double elapsedTime = quizTimer.end();
-	*/
-	public double end() { //method to end timer and return elapsed time
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        return elapsedTime / 1000.0;
-	}
 	
 	
 	public int[] incOrRand(boolean incOrRand) {//incOrRand=true: Increasing difficulty. False: Random Questions
