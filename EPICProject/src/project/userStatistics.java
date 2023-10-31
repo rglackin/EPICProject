@@ -1,24 +1,19 @@
 import java.lang.Math;
 public class userStatistics {
-	public static void main(String[] args) {
-		int[] results = {1,12,16,18};
-		System.out.println(standardDeviation(results));
-	}
+	
 	public static double median(int[] results) { // Return median from array of quiz results
 		double median = 0;
 		int[] sortedResults = bubbleSort(results); // Sort results in order
-		if ((sortedResults.length % 2) == 1) {
+		if ((sortedResults.length % 2) == 1) {	//Find middle index for odd number length array
 			median = sortedResults[sortedResults.length / 2];
-		} else if ((sortedResults.length % 2) == 0) {
+		} else {	//Find middle index for even number length array
 			median = (sortedResults[sortedResults.length / 2] + sortedResults[(sortedResults.length / 2) -1]) / 2;
-		} else {
-			System.out.println("Invalid array to calculate median");
-		}
+		} 
 		return median;
 
 	}
 
-	public static double mean(int[] results) {
+	public static double mean(int[] results) {	// Return mean from array of quiz results
 		int sum = 0;
 		int mean = 0;
 		for (int i = 0; i < results.length; i++) {
@@ -28,7 +23,7 @@ public class userStatistics {
 		return mean;
 	}
 
-	public static double standardDeviation(int[] results) {
+	public static double standardDeviation(int[] results) {	// Return standard deviation from array of quiz results
 		double mean = mean(results);
 		double sumOfSquares = 0;
 		for (int i = 0; i < results.length; i++) {
@@ -37,7 +32,7 @@ public class userStatistics {
 		return (Math.sqrt((sumOfSquares / results.length)));
 	}
 
-	private static int[] bubbleSort(int[] arr) {
+	private static int[] bubbleSort(int[] arr) { // method to sort array of integers using bubblesort, used to calculate mean.
 		int i, j, temp;
 		boolean swapped;
 		for (i = 0; i < arr.length - 1; i++) {
