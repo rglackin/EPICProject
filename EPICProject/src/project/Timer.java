@@ -1,5 +1,3 @@
-package project;
-
 public class Timer {
 	
 	/* In main method:
