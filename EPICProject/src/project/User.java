@@ -61,14 +61,16 @@ public class User {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("userID.txt", true));
 			BufferedReader reader = new BufferedReader(new FileReader("userID.txt"));
 			String line = reader.readLine();
-
-			while (reader.readLine() != null) {
+			String prevLine = "0";
+			while (line != null) {
 				System.out.println(line);
 				// read next line
+				prevLine =line;
 				line = reader.readLine();
+				
 			}
 			
-			newID += Integer.parseInt(line);
+			newID += Integer.parseInt(prevLine);
 			writer.append(String.format("\n%s", newID));
 			writer.close();
 			reader.close();
