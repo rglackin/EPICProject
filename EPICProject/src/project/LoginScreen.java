@@ -99,8 +99,14 @@ public class LoginScreen implements ActionListener {
                 }
     }
     public static void Register(String[] info) {
-        u.setUserInfo(info);
-        OpenMenu();
+        if(passRegex.validPassword(info[1])){
+            u.setUserInfo(info);
+            OpenMenu();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Registration Unsuccessful, password invalid");
+        }
+        
     }
     public static void OpenMenu(){
         new MenuScreen(u);
